@@ -1,0 +1,28 @@
+
+body {
+    background-color: #111;
+}
+
+#column-container {
+    height: 100%;
+    width: 100%;
+    /* background-color: #ff3864; */
+    background: radial-gradient(ellipse at top, #ff3864, transparent),
+            radial-gradient(ellipse at bottom, #ff6c11, transparent);
+}
+
+#ceiling {
+    background-color: aliceblue;
+}
+
+.column {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(#0d0221, #261447);
+    padding: 50vh 7vh;
+    /* left: 1px; */
+}
+
+.column::after {
+    box-shadow: 4rem 0 2rem -1rem #111;
+}
