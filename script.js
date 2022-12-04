@@ -11,7 +11,7 @@ window.onload = () => {
         for(let i = numCols; i > 0; i--) {
             let newColumn = document.createElement('div');
             newColumn.style.scale = i / numCols;
-            newColumn.style.left = `${numCols - (i)}rem`;
+            newColumn.style.left = `-${numCols - i}rem`;
             newColumn.classList.add('column');
             columnContainer.appendChild(newColumn);
         }
@@ -19,23 +19,16 @@ window.onload = () => {
 
     const takeAStroll = (event) => {
         event.preventDefault();
-    
-        //scale += event.deltaY * -0.01;
-    
+        //console.log("event.deltaY:", event.deltaY)
         let columns = document.querySelectorAll('.column');
 
         columns.forEach((column, idx) => {
-            let scale = parseFloat(column.style.scale) + (event.deltaY * -0.01);
-            let currentLeft = getCurrentLeft(column);
-            let newLeft = currentLeft + (1 * event.deltaY);
-            if(column.style.scale < 0) {
-                //column.style.display = 'hidden';
+            if(event.deltaY > 0) {
+                column.style.animation = `goForwards 4s 1 linear normal forwards`;    
             } else {
-                // set a minmax on this for now??
-                column.style.scale = scale;
-                //column.style.left = newLeft + 'px';
+                column.style.animation = `goBackwards 4s 1 linear normal forwards`;
             }
-        });
+        })
     }
     
     let columnContainer = document.getElementById('column-container');
