@@ -15,6 +15,11 @@ const takeAStroll = (event) => {
         } else {
             column.style.transform = `scaleZ(${event.deltaY})`;
             //column.style.left = `${(newLeft)}px`;
+            if(event.deltaY > 0) {
+                column.style.animation = `goForwards 4s 1 linear normal forwards`;    
+            } else {
+                column.style.animation = `goBackwards 4s 1 linear normal forwards`;
+            }
         }
     });
 }

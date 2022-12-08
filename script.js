@@ -1,4 +1,6 @@
-window.onload = () => {
+(function() {
+
+window.onload = function() {
 
     // TODO: create a bunch of columns at page load -- DONE
     // they need to be scaled -- DONE
@@ -6,35 +8,47 @@ window.onload = () => {
     //      - stoa of attalos for reference: https://www.flickr.com/photos/jlascar/4517779606
     //      - NB: columns are 'farther apart' when 'nearer' to viewer, 'closer together' when 'further away'
 
-    const generateColumns = (numCols = 10) => {
-        let columnContainer = document.getElementById('column-container');
-        for(let i = numCols; i > 0; i--) {
-            let newColumn = document.createElement('div');
-            newColumn.style.scale = i / numCols;
-            newColumn.style.left = `-${numCols - i}rem`;
-            newColumn.classList.add('column');
-            columnContainer.appendChild(newColumn);
-        }
-    }
-
-    const takeAStroll = (event) => {
-        event.preventDefault();
-        //console.log("event.deltaY:", event.deltaY)
-        let columns = document.querySelectorAll('.column');
-
-        columns.forEach((column, idx) => {
-            if(event.deltaY > 0) {
-                column.style.animation = `goForwards 4s 1 linear normal forwards`;    
-            } else {
-                column.style.animation = `goBackwards 4s 1 linear normal forwards`;
-            }
-        })
-    }
     
-    let columnContainer = document.getElementById('column-container');
+    let main = document.getElementById('main');
     generateColumns(10);
-    columnContainer.onwheel = takeAStroll;
+    main.onwheel = takeAStroll;
 };
+
+const state = {}
+
+const methods = {
+    generateColumns: generateColumns,
+    //takeAStroll: takeAStroll
+}
+
+
+function generateColumns (numCols = 10) {
+    let columnContainer = document.getElementById('column-container');
+    for(let i = numCols; i > 0; i--) {
+        let newColumn = generateOneColumn(i, numCols);
+        columnContainer.appendChild(newColumn);
+    }
+}
+
+function generateOneColumn(index, numCols) {
+    let newColumn = document.createElement('div');
+    newColumn.style.scale = index / numCols;
+    //newColumn.style.left = `-${numCols - index}rem`;
+    newColumn.classList.add('column');
+    return newColumn;
+}
+
+const takeAStroll = (event) => {
+    event.preventDefault();
+    let columns = document.querySelectorAll('.column');
+    let delta = event.deltaY ? event.deltaY : event.deltaX;
+
+    columns.forEach((column, idx) => {
+        let scale = parseFloat(column.style.scale) + (delta * -0.01);
+        column.style.scale = `${scale}`;
+        column.style.transform = `translateZ(${scale})`
+    })
+}
 
 /*
     HELPER FUNCTIONS
@@ -54,3 +68,6 @@ const getCurrentLeft = (col) => {
 const styleToNumeric = (styleValue, unit) => {
     return parseFloat(styleValue.replace(unit, ''));
 }
+
+
+})()
