@@ -12,6 +12,7 @@ window.onload = function() {
     let main = document.getElementById('main');
     generateColumns(10);
     main.onwheel = takeAStroll;
+    document.getElementById('show-contact-info').addEventListener('click', toggleContactInfo);
 };
 
 const state = {}
@@ -32,8 +33,8 @@ function generateColumns (numCols = 10) {
 
 function generateOneColumn(index, numCols) {
     let newColumn = document.createElement('div');
-    newColumn.style.scale = index / numCols;
-    //newColumn.style.left = `-${numCols - index}rem`;
+    newColumn.style.scale = Math.min(Math.max((index / numCols), -1), 1);
+    //newColumn.style.scale = (index >= 5) ? index / numCols : (index / numCols)
     newColumn.classList.add('column');
     return newColumn;
 }
@@ -48,6 +49,33 @@ const takeAStroll = (event) => {
         column.style.scale = `${scale}`;
         column.style.transform = `translateZ(${scale})`
     })
+}
+
+const toggleContactInfo = () => {
+    const contactInfo = document.getElementById('contact-info');
+    if(contactInfo.classList.contains('hidden')){
+        const address = "ngm01_contact";
+        const domain = "protonmail.com";
+        const email = `${address}@${domain}`
+        if(contactInfo.childElementCount <= 1) {
+            let addy = document.createElement('p');
+            addy.id = "addy";
+            addy.textContent = email;
+            contactInfo.appendChild(addy);
+            document.getElementById('toggle-text').textContent = 'hide';
+        }
+        contactInfo.classList.remove('hidden');
+        contactInfo.style.animation = 'reveal 3s steps(10, end)';
+    } else {
+        contactInfo.classList.add('hidden');
+        document.getElementById('addy').remove();
+        document.getElementById('toggle-text').textContent = 'view';
+    }
+
+}
+
+const hideContactInfo = () => {
+
 }
 
 /*

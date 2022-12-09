@@ -1,0 +1,18 @@
+
+@keyframes goForwards {
+    from {
+        transform: translateZ(0px);
+    }
+    to {
+        transform: translateZ(300px);
+    }
+}
+
+@keyframes goBackwards {
+    from {
+        transform: translateZ(300px);
+    }
+    to {
+        transform: translateZ(0px);
+    }
+}

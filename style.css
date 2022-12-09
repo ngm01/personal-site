@@ -37,31 +37,42 @@ body {
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 25%;
-    left: 20%;
+    text-align: center;
+    top: 8vh;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
     padding: 2rem;
     color: #faf9f6;
     background-color: rgba(1, 1, 1, .5);
     font-size: 2rem;
-    animation: bounce 2s ease alternate-reverse 4 forwards;
+    animation: bounce 2s ease alternate-reverse 2 forwards;
 }
 
-@keyframes goForwards {
-    from {
-        transform: translateZ(0px);
-    }
-    to {
-        transform: translateZ(300px);
-    }
+.notice .links {
+    display: flex;
+    flex-direction: column;
 }
 
-@keyframes goBackwards {
-    from {
-        transform: translateZ(300px);
-    }
-    to {
-        transform: translateZ(0px);
-    }
+.notice .links a {
+    color: #faf9f6;
+    padding: .5em 0;
+}
+
+#contact-info {
+    display: flex;
+    margin-top: .5rem;
+    background-color: rgba(255, 255, 255, .05);
+}
+
+#addy {
+    padding: 1rem;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 @keyframes color {
@@ -81,7 +92,22 @@ body {
         transform: translateY(0);
     }
     to {
-        transform: translateY(-50px);
+        transform: translateY(-1rem);
     }
+}
 
+@keyframes reveal {
+    from { opacity: 0 }
+}
+
+@media only screen and (max-width: 420px) {
+    .notice {
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .notice {
+        font-size: 1rem;
+    }
 }
