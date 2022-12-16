@@ -57,15 +57,15 @@ const toggleContactInfo = () => {
         const address = "ngm01_contact";
         const domain = "protonmail.com";
         const email = `${address}@${domain}`
-        if(contactInfo.childElementCount <= 1) {
+        if(contactInfo.childElementCount < 1) {
             let addy = document.createElement('p');
             addy.id = "addy";
             addy.textContent = email;
             contactInfo.appendChild(addy);
             document.getElementById('toggle-text').textContent = 'hide';
         }
+        //contactInfo.style.animation = 'reveal 4s steps(1000, end)';
         contactInfo.classList.remove('hidden');
-        contactInfo.style.animation = 'reveal 3s steps(10, end)';
     } else {
         contactInfo.classList.add('hidden');
         document.getElementById('addy').remove();

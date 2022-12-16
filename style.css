@@ -58,7 +58,7 @@ body {
 
 .notice .links a {
     color: #faf9f6;
-    padding: .5em 0;
+    padding: .75em 0;
 }
 
 #contact-info {
@@ -97,7 +97,7 @@ body {
 }
 
 @keyframes reveal {
-    from { opacity: 0 }
+    from { height: 0; opacity: 0 }
 }
 
 @media only screen and (max-width: 420px) {
