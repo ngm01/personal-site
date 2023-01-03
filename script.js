@@ -74,10 +74,6 @@ const toggleContactInfo = () => {
 
 }
 
-const hideContactInfo = () => {
-
-}
-
 /*
     HELPER FUNCTIONS
 */

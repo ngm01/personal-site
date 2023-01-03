@@ -47,7 +47,7 @@ body {
     padding: 2rem;
     color: #faf9f6;
     background-color: rgba(1, 1, 1, .5);
-    font-size: 2rem;
+    font-size: 1.5rem;
     animation: bounce 2s ease alternate-reverse 2 forwards;
 }
 
