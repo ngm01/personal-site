@@ -1,3 +1,9 @@
+:root {
+    --bubble-color-a: rgba(153, 208, 226, .4);
+    --bubble-color-b: rgb(153, 208, 226);
+    --shadow-color: #6d454c;
+  }
+
 body {
     margin: 0;
 }
@@ -31,3 +37,40 @@ body {
     width: 100%;
     object-fit: cover;
 }
+
+.word-bubble {
+    position: absolute;
+    top: 11vh;
+    left: 12vw;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 10rem;
+    padding: 1rem;
+    background: linear-gradient(to left, var(--bubble-color-a), 60%, var(--bubble-color-b));
+    border-radius: 1rem;
+    color: #fff;
+    /* box-shadow: .6rem .75rem var(--shadow-color); */
+    animation: bounce 5s ease-in-out infinite
+  }
+  
+  .word-bubble:after {
+    position: absolute;
+    bottom: 15%;
+    left: -12%;
+    content: '';
+    border: 1rem solid transparent;
+    border-right-color: var(--bubble-color-b);
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translatey(0%)
+    }
+    50% {
+      transform: translatey(15%)
+    }
+    100% {
+      transform: translatey(0%)
+    }
+  }
