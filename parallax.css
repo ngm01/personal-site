@@ -9,7 +9,7 @@ body {
 }
 
 .wrapper {
-    height: 100vh;
+    height: 121%;
     overflow-y: auto;
     overflow-x: hidden;
     perspective: 10px;
@@ -40,27 +40,79 @@ body {
 
 .word-bubble {
     position: absolute;
-    top: 11vh;
-    left: 12vw;
     display: flex;
     text-align: center;
     justify-content: center;
     width: 10rem;
     padding: 1rem;
-    background: linear-gradient(to left, var(--bubble-color-a), 60%, var(--bubble-color-b));
     border-radius: 1rem;
     color: #fff;
     /* box-shadow: .6rem .75rem var(--shadow-color); */
     animation: bounce 5s ease-in-out infinite
   }
+
+  .word-bubble-left {
+    background: linear-gradient(to left, var(--bubble-color-a), 60%, var(--bubble-color-b));
+  }
+
+  .word-bubble-right {
+    background: linear-gradient(to right, var(--bubble-color-a), 60%, var(--bubble-color-b));
+  }
+
+  .word-bubble-top {
+    background: linear-gradient(to top, var(--bubble-color-a), 60%, var(--bubble-color-b));
+  }
+
+  .hello-bubble {
+    top: 14vh;
+    left: 12vw;
+  }
+
+  .name-bubble {
+    top: 30vh;
+    right: 30vw;
+  }
+
+  .projects-bubble {
+    top: 100vh;
+    left: 10vw;
+    width: 80%;
+    height: 20%;
+  }
+
+  .thanks-bubble {
+    top: 175vh;
+    left: 23vw;
+  }
+
+  .how-contact-bubble {
+    top: 259vh;
+    left: 24vw;
+  }
+
+  .contact-info-bubble {
+    top: 260vh;
+    left: 49vw;
+    width: 13rem;
+    height: 3rem;
+  }
   
   .word-bubble:after {
     position: absolute;
-    bottom: 15%;
-    left: -12%;
     content: '';
     border: 1rem solid transparent;
+  }
+
+  .word-bubble-left:after {
+    bottom: 15%;
+    left: -12%;
     border-right-color: var(--bubble-color-b);
+  }
+
+  .word-bubble-right:after {
+    bottom: 35%;
+    right: -14%;
+    border-left-color: var(--bubble-color-b);;
   }
 
   @keyframes bounce {
