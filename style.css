@@ -26,7 +26,8 @@ body {
 
 .column {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    display: none;
     background: linear-gradient(-45deg, #023788, #2e2157);
     padding: 50vh 7vh;
     border-radius: .5rem;
@@ -105,9 +106,6 @@ body {
 }
 
 @media only screen and (max-width: 430px) {
-    .column {
-        display: none;
-    }
     .notice {
         top: 3vh;
         height: fit-content;
