@@ -12,7 +12,8 @@ window.onload = function() {
     let main = document.getElementById('main');
     generateColumns(10);
     main.onwheel = takeAStroll;
-    document.getElementById('show-contact-info').addEventListener('click', toggleContactInfo);
+    main.ontouchmove = takeAStroll;
+    //document.getElementById('show-contact-info').addEventListener('click', toggleContactInfo);
 };
 
 const state = {}
@@ -40,7 +41,7 @@ function generateOneColumn(index, numCols) {
 }
 
 const takeAStroll = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
     let columns = document.querySelectorAll('.column');
     let delta = event.deltaY ? event.deltaY : event.deltaX;
 

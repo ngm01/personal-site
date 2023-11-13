@@ -1,6 +1,7 @@
 body {
     background-color: #111;
     font-family: 'Lato', sans-serif;
+    font-size: 16px;
 }
 
 #column-container {
@@ -36,14 +37,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    position: relative;
     text-align: center;
-    top: 8vh;
+    top: 4vh;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 50vw;
+    width: 75vw;
     padding: 2rem;
     color: #faf9f6;
     background-color: rgba(1, 1, 1, .5);
@@ -58,7 +59,10 @@ body {
 
 .notice .links a {
     color: #faf9f6;
-    padding: .75em 0;
+}
+
+.notice .links a:hover {
+    background-color: cornflowerblue;
 }
 
 #contact-info {
@@ -100,13 +104,15 @@ body {
     from { height: 0; opacity: 0 }
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 430px) {
     .notice {
-        font-size: 3rem;
+        top: 3vh;
+        height: fit-content;
+        font-size: 1.25rem;
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 375px) {
     .notice {
         font-size: 1rem;
     }
