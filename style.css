@@ -105,6 +105,9 @@ body {
 }
 
 @media only screen and (max-width: 430px) {
+    .column {
+        display: none;
+    }
     .notice {
         top: 3vh;
         height: fit-content;
