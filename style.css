@@ -1,120 +1,205 @@
-body {
-    background-color: #111;
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
+/* ngm01.com — personal site
+   01a: pure white, Newsreader italic Hello, top-left anchored. */
+
+:root {
+  --ink: #1c1a17;
+  --muted: #7a7670;
+  --bg: #ffffff;
+
+  /* Guessword tile palette (matches guessword.ngm01.com). */
+  --gw-gray:   #787c7e;
+  --gw-yellow: #c9b458;
+  --gw-green:  #4ea346;
+
+  /* Layout. */
+  --margin-x: 140px;
+  --margin-y: 140px;
 }
 
-#column-container {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    perspective: 500px;
-    perspective-origin: right;
-    background: radial-gradient(ellipse at top, #023788, transparent),
-            radial-gradient(ellipse at bottom, #2e2157, transparent),
-            radial-gradient(ellipse at left, #ff6c11, transparent),
-            radial-gradient(ellipse at right, #f9c80e, transparent);
-    background-size: 400% 400%;
-    animation: color 15s ease infinite;
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Newsreader, Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-.column {
-    position: relative;
-    /* display: inline-block; */
-    display: none;
-    background: linear-gradient(-45deg, #023788, #2e2157);
-    padding: 50vh 7vh;
-    border-radius: .5rem;
+.page {
+  min-height: 100vh;
+  padding: var(--margin-y) var(--margin-x);
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
 }
 
-
-.notice {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    text-align: center;
-    top: 4vh;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75vw;
-    padding: 2rem;
-    color: #faf9f6;
-    background-color: rgba(1, 1, 1, .5);
-    font-size: 1.5rem;
-    animation: bounce 2s ease alternate-reverse 2 forwards;
+/* — Hello — */
+.hello {
+  margin: 0 0 36px;
+  font-family: Newsreader, Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 72;
+  color: var(--ink);
 }
 
-.notice .links {
-    display: flex;
-    flex-direction: column;
+/* — Body — */
+.bio {
+  margin: 0;
+  max-width: 680px;
+  font-size: 22px;
+  line-height: 1.55;
+  letter-spacing: -0.003em;
+  font-variation-settings: "opsz" 20;
 }
 
-.notice .links a {
-    color: #faf9f6;
+.bio em { font-style: italic; }
+
+.bio a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 200ms ease;
+}
+.bio a:hover { text-decoration-color: var(--ink); }
+
+/* — Link row —
+   Pushed to the bottom of the page on tall viewports via `margin-top: auto`,
+   but flows naturally below the body when the viewport is too short to keep
+   them apart — so the icons can never overlap the paragraph. */
+.links {
+  margin-top: auto;
+  padding-top: 96px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: var(--ink);
 }
 
-.notice .links a:hover {
-    background-color: cornflowerblue;
+.links > a {
+  display: inline-flex;
+  color: var(--ink);
+  text-decoration: none;
+  transition: opacity 180ms ease;
+}
+.links > a:hover { opacity: 0.6; }
+
+/* — Guessword tile —
+   Faithful to the guessword.ngm01.com letterSquare:
+   1px white border, white letter, system-sans 700, square.
+   Sits in the icon row at icon-row scale (24px). On hover the tile
+   spins 360° on the Y axis while its background animates
+   gray → yellow → green to match the in-game reveal. */
+.guessword-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
 }
 
-#contact-info {
-    display: flex;
-    margin-top: .5rem;
-    background-color: rgba(255, 255, 255, .05);
+.guessword-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border: 1px solid #ffffff;
+  outline: 1px solid rgba(0, 0, 0, 0.08); /* faint ring so the white border shows on white */
+  background: var(--gw-gray);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0s, background-color 0s;
 }
 
-#addy {
-    padding: 1rem;
+.guessword-wrap:hover .guessword-tile,
+.guessword-wrap:focus-within .guessword-tile {
+  animation:
+    gw-spin  1s ease-in-out 1 forwards,
+    gw-color 1s ease-in-out 1 forwards;
 }
 
-.hidden {
-    visibility: hidden;
+@keyframes gw-spin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
 }
 
-@keyframes color {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+@keyframes gw-color {
+  0%   { background-color: var(--gw-gray); }
+  40%  { background-color: var(--gw-yellow); }
+  60%  { background-color: var(--gw-yellow); }
+  100% { background-color: var(--gw-green); }
 }
 
-@keyframes bounce {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-1rem);
-    }
+/* — Tooltip — */
+.guessword-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(28, 26, 23, 0.94);
+  color: #f4f1ea;
+  font-family: Newsreader, Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.35;
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease 80ms;
+  z-index: 10;
 }
 
-@keyframes reveal {
-    from { height: 0; opacity: 0 }
+.guessword-tooltip em { font-style: italic; }
+
+.guessword-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(28, 26, 23, 0.94);
+  transform: translateX(-50%) rotate(45deg);
 }
 
-@media only screen and (max-width: 430px) {
-    .notice {
-        top: 3vh;
-        height: fit-content;
-        font-size: 1.25rem;
-    }
+.guessword-wrap:hover .guessword-tooltip,
+.guessword-wrap:focus-within .guessword-tooltip {
+  opacity: 1;
 }
 
-@media only screen and (max-width: 375px) {
-    .notice {
-        font-size: 1rem;
-    }
+/* — Reduced motion: drop the spin, keep the color flash. — */
+@media (prefers-reduced-motion: reduce) {
+  .guessword-wrap:hover .guessword-tile,
+  .guessword-wrap:focus-within .guessword-tile {
+    animation: gw-color 600ms ease-in-out 1 forwards;
+  }
+}
+
+/* — Small viewports — */
+@media (max-width: 720px) {
+  :root {
+    --margin-x: 32px;
+    --margin-y: 64px;
+  }
+  .hello { font-size: 64px; }
+  .bio { font-size: 18px; }
+  .links { padding-top: 56px; }
 }
